@@ -1,6 +1,6 @@
 ﻿using CoopHospitalHRM.Models.Entities;
 using CoopHospitalHRM.Services;
-using HospitalHRM.Models.ViewModels;
+using CoopHospitalHRM.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;

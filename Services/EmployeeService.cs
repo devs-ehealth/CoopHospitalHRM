@@ -22,7 +22,7 @@ namespace CoopHospitalHRM.Services
             return await _context.Employee
                 .Include(e => e.Department)
                 .Include(e => e.Designation)
-                .ToListAsync();
+                .ToListAsync();a
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
