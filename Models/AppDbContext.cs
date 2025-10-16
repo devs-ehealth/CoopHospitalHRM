@@ -82,9 +82,10 @@ namespace CoopHospitalHRM.Models
 
             // Attendance unique constraint for employee and date
             modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Attendance>()
-                .HasIndex(a => new { a.EmployeeID, a.Date })
-                .IsUnique()
-                .HasFilter("[Date] IS NOT NULL");
+                .HasOne(a => a.Employee)
+    .WithMany()
+    .HasForeignKey(a => a.EmployeeID)
+    .OnDelete(DeleteBehavior.Restrict);
 
             // Leave balance unique constraint
             modelBuilder.Entity<CoopHospitalHRM.Models.Entities.LeaveBalance>()
@@ -101,12 +102,16 @@ namespace CoopHospitalHRM.Models
                 .HasDefaultValue("Present");
 
             modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Leave>()
-                .Property(l => l.Status)
-                .HasDefaultValue("Pending");
+                .HasOne(a => a.Employee)
+    .WithMany()
+    .HasForeignKey(a => a.EmployeeID)
+    .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Loan>()
-                .Property(l => l.Status)
-                .HasDefaultValue("Active");
+                .HasOne(a => a.Employee)
+    .WithMany()
+    .HasForeignKey(a => a.EmployeeID)
+    .OnDelete(DeleteBehavior.Restrict);
 
             // Configure decimal precision
             modelBuilder.Entity<CoopHospitalHRM.Models.Entities.SalaryGrade>()

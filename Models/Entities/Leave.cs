@@ -44,7 +44,8 @@ namespace CoopHospitalHRM.Models.Entities
         public LeaveType? LeaveType { get; set; }
 
         [ForeignKey("ApprovedBy")]
-        public Employee? Approver { get; set; }
+        public int? ApproverID { get; set; }
+        public Employee Approver { get; set; }
     }
 
 
