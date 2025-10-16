@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace HospitalHRM.Models.ViewModels
+namespace CoopHospitalHRM.Models.ViewModels
 {
     public class EmployeeVM
     {

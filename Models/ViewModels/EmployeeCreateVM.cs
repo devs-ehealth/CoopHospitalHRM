@@ -1,4 +1,4 @@
-﻿using HospitalHRM.Models.ViewModels;
+﻿using CoopHospitalHRM.Models.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoopHospitalHRM.Models.ViewModels

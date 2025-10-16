@@ -1,7 +1,5 @@
 ﻿using CoopHospitalHRM.Models.Entities;
-using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoopHospitalHRM.Models
@@ -11,137 +9,329 @@ namespace CoopHospitalHRM.Models
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         // Master Tables
-        public DbSet<CoopHospitalHRM.Models.Entities.Department> Department { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.EmployeeCategory> EmployeeCategory { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.Designation> Designation { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.SalaryGrade> SalaryGrade { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.WorkSchedule> WorkSchedule { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.LeaveType> LeaveType { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.HospitalAllowance> HospitalAllowance { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.SystemRole> SystemRole { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet<EmployeeCategory> EmployeeCategory { get; set; }
+        public DbSet<Designation> Designation { get; set; }
+        public DbSet<SalaryGrade> SalaryGrade { get; set; }
+        public DbSet<WorkSchedule> WorkSchedule { get; set; }
+        public DbSet<LeaveType> LeaveType { get; set; }
+        public DbSet<HospitalAllowance> HospitalAllowance { get; set; }
+        public DbSet<SystemRole> SystemRole { get; set; }
 
         // Core Tables
-        public DbSet<CoopHospitalHRM.Models.Entities.Employee> Employee { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.Attendance> Attendance { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.Leave> Leave { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.LeaveBalance> LeaveBalance { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.SalaryStructure> SalaryStructure { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.EmployeeAllowance> EmployeeAllowance { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.Payroll> Payroll { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.PayrollTransaction> PayrollTransaction { get; set; }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Attendance> Attendance { get; set; }
+        public DbSet<Leave> Leave { get; set; }
+        public DbSet<LeaveBalance> LeaveBalance { get; set; }
+        public DbSet<SalaryStructure> SalaryStructure { get; set; }
+        public DbSet<EmployeeAllowance> EmployeeAllowance { get; set; }
+        public DbSet<Payroll> Payroll { get; set; }
+        public DbSet<PayrollTransaction> PayrollTransaction { get; set; }
 
         // EPF/ETF Tables
-        public DbSet<CoopHospitalHRM.Models.Entities.EPFETFInfo> EPFETFInfo { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.EPFContribution> EPFContribution { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.ETFContribution> ETFContribution { get; set; }
+        public DbSet<EPFETFInfo> EPFETFInfo { get; set; }
+        public DbSet<EPFContribution> EPFContribution { get; set; }
+        public DbSet<ETFContribution> ETFContribution { get; set; }
 
         // Hospital Specific Tables
-        public DbSet<CoopHospitalHRM.Models.Entities.MedicalQualification> MedicalQualification { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.OnCallSchedule> OnCallSchedule { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.WardAssignment> WardAssignment { get; set; }
+        public DbSet<MedicalQualification> MedicalQualification { get; set; }
+        public DbSet<OnCallSchedule> OnCallSchedule { get; set; }
+        public DbSet<WardAssignment> WardAssignment { get; set; }
 
         // Additional Tables
-        public DbSet<CoopHospitalHRM.Models.Entities.Loan> Loan { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.SystemUser> SystemUser { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.EmployeePerformance> EmployeePerformance { get; set; }
+        public DbSet<Loan> Loan { get; set; }
+        public DbSet<SystemUser> SystemUser { get; set; }
+        public DbSet<EmployeePerformance> EmployeePerformance { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure relationships and constraints
+            // =============================================
+            // TABLE MAPPINGS - Map to your actual SQL tables
+            // =============================================
 
-            // Employee - Department relationship
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Employee>()
+            // Master Tables mapping
+            modelBuilder.Entity<Department>().ToTable("HR_Departments");
+            modelBuilder.Entity<EmployeeCategory>().ToTable("HR_EmployeeCategories");
+            modelBuilder.Entity<Designation>().ToTable("HR_Designations");
+            modelBuilder.Entity<SalaryGrade>().ToTable("HR_SalaryGrades");
+            modelBuilder.Entity<WorkSchedule>().ToTable("HR_WorkSchedules");
+            modelBuilder.Entity<LeaveType>().ToTable("HR_LeaveTypes");
+            modelBuilder.Entity<HospitalAllowance>().ToTable("HR_HospitalAllowances");
+            modelBuilder.Entity<SystemRole>().ToTable("HR_SystemRoles");
+            
+            // Core Tables mapping
+            modelBuilder.Entity<Employee>().ToTable("HR_Employees");
+            modelBuilder.Entity<Attendance>().ToTable("HR_Attendance");
+            modelBuilder.Entity<Leave>().ToTable("HR_Leaves");
+            modelBuilder.Entity<LeaveBalance>().ToTable("HR_LeaveBalances");
+            modelBuilder.Entity<SalaryStructure>().ToTable("HR_SalaryStructures");
+            modelBuilder.Entity<EmployeeAllowance>().ToTable("HR_EmployeeAllowances");
+            modelBuilder.Entity<Payroll>().ToTable("HR_Payrolls");
+            modelBuilder.Entity<PayrollTransaction>().ToTable("HR_PayrollTransactions");
+            
+            // EPF/ETF Tables mapping
+            modelBuilder.Entity<EPFETFInfo>().ToTable("HR_EPFETFInfo");
+            modelBuilder.Entity<EPFContribution>().ToTable("HR_EPFContributions");
+            modelBuilder.Entity<ETFContribution>().ToTable("HR_ETFContributions");
+            
+            // Hospital Specific Tables mapping
+            modelBuilder.Entity<MedicalQualification>().ToTable("HR_MedicalQualifications");
+            modelBuilder.Entity<OnCallSchedule>().ToTable("HR_OnCallSchedule");
+            modelBuilder.Entity<WardAssignment>().ToTable("HR_WardAssignments");
+            
+            // Additional Tables mapping
+            modelBuilder.Entity<Loan>().ToTable("HR_Loans");
+            modelBuilder.Entity<SystemUser>().ToTable("HR_SystemUsers");
+            modelBuilder.Entity<EmployeePerformance>().ToTable("HR_EmployeePerformance");
+
+            // =============================================
+            // RELATIONSHIP CONFIGURATIONS
+            // =============================================
+
+            // Employee - Department relationship (Many to One)
+            modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Department)
                 .WithMany(d => d.Employees)
                 .HasForeignKey(e => e.DepartmentID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Employee - Designation relationship
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Employee>()
+            // Employee - Designation relationship (Many to One)
+            modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Designation)
                 .WithMany(d => d.Employees)
                 .HasForeignKey(e => e.DesignationID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Unique constraints
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Employee>()
+            // Employee - EmployeeCategory relationship (Many to One)
+            modelBuilder.Entity<Employee>()
+                .HasOne(e => e.EmployeeCategory)
+                .WithMany(ec => ec.Employees)
+                .HasForeignKey(e => e.EmployeeCategoryID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - SalaryGrade relationship (Many to One)
+            modelBuilder.Entity<Employee>()
+                .HasOne(e => e.SalaryGrade)
+                .WithMany(sg => sg.Employees)
+                .HasForeignKey(e => e.GradeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - WorkSchedule relationship (Many to One)
+            modelBuilder.Entity<Employee>()
+                .HasOne(e => e.WorkSchedule)
+                .WithMany(ws => ws.Employees)
+                .HasForeignKey(e => e.WorkScheduleID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =============================================
+            // EMPLOYEE COLLECTIONS CONFIGURATION
+            // =============================================
+
+            // Employee - Attendances (One to Many)
+            modelBuilder.Entity<Attendance>()
+                .HasOne(a => a.Employee)
+                .WithMany(e => e.Attendances)
+                .HasForeignKey(a => a.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - Leaves (One to Many)
+            modelBuilder.Entity<Leave>()
+                .HasOne(l => l.Employee)
+                .WithMany(e => e.Leaves)
+                .HasForeignKey(l => l.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - Payrolls (One to Many)
+            modelBuilder.Entity<Payroll>()
+                .HasOne(p => p.Employee)
+                .WithMany(e => e.Payrolls)
+                .HasForeignKey(p => p.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - MedicalQualifications (One to Many)
+            modelBuilder.Entity<MedicalQualification>()
+                .HasOne(mq => mq.Employee)
+                .WithMany(e => e.MedicalQualifications)
+                .HasForeignKey(mq => mq.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - OnCallSchedules (One to Many)
+            modelBuilder.Entity<OnCallSchedule>()
+                .HasOne(ocs => ocs.Employee)
+                .WithMany(e => e.OnCallSchedules)
+                .HasForeignKey(ocs => ocs.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - WardAssignments (One to Many)
+            modelBuilder.Entity<WardAssignment>()
+                .HasOne(wa => wa.Employee)
+                .WithMany(e => e.WardAssignments)
+                .HasForeignKey(wa => wa.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - SalaryStructures (One to Many)
+            modelBuilder.Entity<SalaryStructure>()
+                .HasOne(ss => ss.Employee)
+                .WithMany(e => e.SalaryStructures)
+                .HasForeignKey(ss => ss.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - EmployeeAllowances (One to Many)
+            modelBuilder.Entity<EmployeeAllowance>()
+                .HasOne(ea => ea.Employee)
+                .WithMany(e => e.EmployeeAllowances)
+                .HasForeignKey(ea => ea.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - EPFETFInfo (One to Many)
+            modelBuilder.Entity<EPFETFInfo>()
+                .HasOne(epf => epf.Employee)
+                .WithMany(e => e.EPFETFInfo)
+                .HasForeignKey(epf => epf.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee - Loans (One to Many)
+            modelBuilder.Entity<Loan>()
+                .HasOne(ln => ln.Employee)
+                .WithMany(e => e.Loans)
+                .HasForeignKey(ln => ln.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Employee Performance - Self Referencing for Reviewer
+            modelBuilder.Entity<EmployeePerformance>()
+                .HasOne(ep => ep.Employee)
+                .WithMany(e => e.PerformanceReviews)
+                .HasForeignKey(ep => ep.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<EmployeePerformance>()
+                .HasOne(ep => ep.Reviewer)
+                .WithMany(e => e.GivenReviews)
+                .HasForeignKey(ep => ep.ReviewerID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =============================================
+            // APPROVER RELATIONSHIPS - FIXED
+            // =============================================
+
+            // Attendance - Approver relationship
+            modelBuilder.Entity<Attendance>()
+                .HasOne(a => a.Approver)
+                .WithMany()
+                .HasForeignKey(a => a.ApprovedBy)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Leave - Approver relationship
+            modelBuilder.Entity<Leave>()
+                .HasOne(l => l.Approver)
+                .WithMany()
+                .HasForeignKey(l => l.ApprovedBy)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =============================================
+            // UNIQUE CONSTRAINTS
+            // =============================================
+
+            // Employee unique constraints
+            modelBuilder.Entity<Employee>()
                 .HasIndex(e => e.EmployeeCode)
                 .IsUnique()
                 .HasFilter("[EmployeeCode] IS NOT NULL");
 
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Employee>()
+            modelBuilder.Entity<Employee>()
                 .HasIndex(e => e.NIC)
                 .IsUnique()
                 .HasFilter("[NIC] IS NOT NULL");
 
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Employee>()
+            modelBuilder.Entity<Employee>()
                 .HasIndex(e => e.Email)
                 .IsUnique()
                 .HasFilter("[Email] IS NOT NULL");
 
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.EmployeePerformance>()
-    .HasOne(ep => ep.Reviewer)
-    .WithMany(e => e.GivenReviews)
-    .HasForeignKey(ep => ep.ReviewerID)
-    .OnDelete(DeleteBehavior.Restrict);
-
-            // Attendance unique constraint for employee and date
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Attendance>()
-                .HasOne(a => a.Employee)
-    .WithMany()
-    .HasForeignKey(a => a.EmployeeID)
-    .OnDelete(DeleteBehavior.Restrict);
-
             // Leave balance unique constraint
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.LeaveBalance>()
+            modelBuilder.Entity<LeaveBalance>()
                 .HasIndex(lb => new { lb.EmployeeID, lb.LeaveTypeID, lb.Year })
                 .IsUnique();
 
-            // Set default values
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Employee>()
+            // =============================================
+            // DEFAULT VALUES & PROPERTY CONFIGURATIONS
+            // =============================================
+
+            // Default values
+            modelBuilder.Entity<Employee>()
                 .Property(e => e.Status)
                 .HasDefaultValue("Active");
 
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Attendance>()
+            modelBuilder.Entity<Attendance>()
                 .Property(a => a.Status)
                 .HasDefaultValue("Present");
 
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Leave>()
-                .HasOne(a => a.Employee)
-    .WithMany()
-    .HasForeignKey(a => a.EmployeeID)
-    .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Leave>()
+                .Property(l => l.Status)
+                .HasDefaultValue("Pending");
 
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Loan>()
-                .HasOne(a => a.Employee)
-    .WithMany()
-    .HasForeignKey(a => a.EmployeeID)
-    .OnDelete(DeleteBehavior.Restrict);
-
-            // Configure decimal precision
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.SalaryGrade>()
+            // Decimal precision configurations
+            modelBuilder.Entity<SalaryGrade>()
                 .Property(sg => sg.BasicSalary)
                 .HasPrecision(18, 2);
 
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.SalaryStructure>()
+            modelBuilder.Entity<SalaryStructure>()
                 .Property(ss => ss.BasicSalary)
                 .HasPrecision(18, 2);
 
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Payroll>()
+            modelBuilder.Entity<Payroll>()
                 .Property(p => p.BasicSalary)
                 .HasPrecision(18, 2);
 
-            // Configure string lengths
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Employee>()
+            modelBuilder.Entity<HospitalAllowance>()
+                .Property(ha => ha.Amount)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<EmployeeAllowance>()
+                .Property(ea => ea.Amount)
+                .HasPrecision(18, 2);
+
+            // String length configurations
+            modelBuilder.Entity<Employee>()
                 .Property(e => e.FullName)
                 .HasMaxLength(200);
 
-            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Department>()
+            modelBuilder.Entity<Department>()
                 .Property(d => d.DepartmentName)
                 .HasMaxLength(100)
                 .IsRequired();
+
+            modelBuilder.Entity<Designation>()
+                .Property(d => d.DesignationName)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            // =============================================
+            // ADDITIONAL RELATIONSHIPS
+            // =============================================
+
+            // EmployeeAllowance - HospitalAllowance relationship
+            modelBuilder.Entity<EmployeeAllowance>()
+                .HasOne(ea => ea.HospitalAllowance)
+                .WithMany(ha => ha.EmployeeAllowances)
+                .HasForeignKey(ea => ea.AllowanceID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // SystemUser - Employee relationship
+            modelBuilder.Entity<SystemUser>()
+                .HasOne(su => su.Employee)
+                .WithMany()
+                .HasForeignKey(su => su.EmployeeID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // SystemUser - SystemRole relationship
+            modelBuilder.Entity<SystemUser>()
+                .HasOne(su => su.SystemRole)
+                .WithMany(sr => sr.SystemUsers)
+                .HasForeignKey(su => su.RoleID)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
