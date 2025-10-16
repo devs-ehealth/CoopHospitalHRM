@@ -104,6 +104,7 @@ namespace CoopHospitalHRM.Models.Entities
         public ICollection<EmployeeAllowance>? EmployeeAllowances { get; set; }
         public ICollection<EPFETFInfo>? EPFETFInfo { get; set; }
         public ICollection<EmployeePerformance>? PerformanceReviews { get; set; }
+        public ICollection<EmployeePerformance>? GivenReviews { get; set; }
         public ICollection<Loan>? Loans { get; set; }
     }
 

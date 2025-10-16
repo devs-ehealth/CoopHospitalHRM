@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
+﻿using CoopHospitalHRM.Models.Entities;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -79,6 +80,12 @@ namespace CoopHospitalHRM.Models
                 .HasIndex(e => e.Email)
                 .IsUnique()
                 .HasFilter("[Email] IS NOT NULL");
+
+            modelBuilder.Entity<CoopHospitalHRM.Models.Entities.EmployeePerformance>()
+    .HasOne(ep => ep.Reviewer)
+    .WithMany(e => e.GivenReviews)
+    .HasForeignKey(ep => ep.ReviewerID)
+    .OnDelete(DeleteBehavior.Restrict);
 
             // Attendance unique constraint for employee and date
             modelBuilder.Entity<CoopHospitalHRM.Models.Entities.Attendance>()
