@@ -10,38 +10,38 @@ namespace CoopHospitalHRM.Models
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         // Master Tables
-        public DbSet<CoopHospitalHRM.Models.Entities.Department> Departments { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.EmployeeCategory> EmployeeCategories { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.Designation> Designations { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.SalaryGrade> SalaryGrades { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.WorkSchedule> WorkSchedules { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.LeaveType> LeaveTypes { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.HospitalAllowance> HospitalAllowances { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.SystemRole> SystemRoles { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.Department> Department { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.EmployeeCategory> EmployeeCategory { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.Designation> Designation { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.SalaryGrade> SalaryGrade { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.WorkSchedule> WorkSchedule { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.LeaveType> LeaveType { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.HospitalAllowance> HospitalAllowance { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.SystemRole> SystemRole { get; set; }
 
         // Core Tables
-        public DbSet<CoopHospitalHRM.Models.Entities.Employee> Employees { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.Employee> Employee { get; set; }
         public DbSet<CoopHospitalHRM.Models.Entities.Attendance> Attendance { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.Leave> Leaves { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.LeaveBalance> LeaveBalances { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.SalaryStructure> SalaryStructures { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.EmployeeAllowance> EmployeeAllowances { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.Payroll> Payrolls { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.PayrollTransaction> PayrollTransactions { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.Leave> Leave { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.LeaveBalance> LeaveBalance { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.SalaryStructure> SalaryStructure { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.EmployeeAllowance> EmployeeAllowance { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.Payroll> Payroll { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.PayrollTransaction> PayrollTransaction { get; set; }
 
         // EPF/ETF Tables
         public DbSet<CoopHospitalHRM.Models.Entities.EPFETFInfo> EPFETFInfo { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.EPFContribution> EPFContributions { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.ETFContribution> ETFContributions { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.EPFContribution> EPFContribution { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.ETFContribution> ETFContribution { get; set; }
 
         // Hospital Specific Tables
-        public DbSet<CoopHospitalHRM.Models.Entities.MedicalQualification> MedicalQualifications { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.OnCallSchedule> OnCallSchedules { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.WardAssignment> WardAssignments { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.MedicalQualification> MedicalQualification { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.OnCallSchedule> OnCallSchedule { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.WardAssignment> WardAssignment { get; set; }
 
         // Additional Tables
-        public DbSet<CoopHospitalHRM.Models.Entities.Loan> Loans { get; set; }
-        public DbSet<CoopHospitalHRM.Models.Entities.SystemUser> SystemUsers { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.Loan> Loan { get; set; }
+        public DbSet<CoopHospitalHRM.Models.Entities.SystemUser> SystemUser { get; set; }
         public DbSet<CoopHospitalHRM.Models.Entities.EmployeePerformance> EmployeePerformance { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
