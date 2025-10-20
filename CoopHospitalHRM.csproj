@@ -9,15 +9,27 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.0.1" />
     <PackageReference Include="AutoMapper.Collection" Version="11.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.EnumMapping" Version="5.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="9.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="Dapper.SqlBuilder" Version="2.1.66" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Build" Version="17.8.3" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Repositories\" />
+    <Folder Include="Models\Services\" />
   </ItemGroup>
 
 </Project>

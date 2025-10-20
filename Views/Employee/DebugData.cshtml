@@ -1,0 +1,81 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Debug Employee Data";
+}
+
+<div class="container mt-4">
+    <h2>Debug Employee Data</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <h4>Error:</h4>
+            <p>@ViewBag.Error</p>
+        </div>
+    }
+
+    @if (ViewBag.Employees != null)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Raw Employee Data (First 10 Records)</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Code</th>
+                            <th>Full Name</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Category</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var employee in ViewBag.Employees)
+                        {
+                            <tr>
+                                <td>@employee.EmployeeID</td>
+                                <td>@employee.EmployeeCode</td>
+                                <td>@employee.FullName</td>
+                                <td>@(employee.Department?.DepartmentName ?? "NULL")</td>
+                                <td>@(employee.Designation?.DesignationName ?? "NULL")</td>
+                                <td>@(employee.EmployeeCategory?.CategoryName ?? "NULL")</td>
+                                <td>@employee.Email</td>
+                                <td>@employee.Status</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5>Database Information</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Total Employees:</strong> @ViewBag.Employees.Count</p>
+                <p><strong>Sample Data Check:</strong></p>
+                <ul>
+                    <li>First Employee: @(ViewBag.Employees[0]?.FullName ?? "No data")</li>
+                    <li>Employee Code: @(ViewBag.Employees[0]?.EmployeeCode ?? "No code")</li>
+                    <li>Department: @(ViewBag.Employees[0]?.Department?.DepartmentName ?? "No department")</li>
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            No employee data found in ViewBag.
+        </div>
+    }
+
+    <div class="mt-4">
+        <a href="@Url.Action("Index")" class="btn btn-primary">Back to Employee List</a>
+    </div>
+</div>

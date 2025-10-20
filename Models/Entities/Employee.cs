@@ -37,7 +37,7 @@ namespace CoopHospitalHRM.Models.Entities
 
         public DateTime? JoinDate { get; set; }
 
-        // Foreign Keys
+        // Foreign Keys - Make sure these match your database
         public int? DepartmentID { get; set; }
         public int? DesignationID { get; set; }
         public int? GradeID { get; set; }
@@ -79,33 +79,32 @@ namespace CoopHospitalHRM.Models.Entities
 
         // Navigation Properties
         [ForeignKey("DepartmentID")]
-        public Department? Department { get; set; }
+        public virtual Department? Department { get; set; }
 
         [ForeignKey("DesignationID")]
-        public Designation? Designation { get; set; }
+        public virtual Designation? Designation { get; set; }
 
         [ForeignKey("GradeID")]
-        public SalaryGrade? SalaryGrade { get; set; }
+        public virtual SalaryGrade? SalaryGrade { get; set; }
 
         [ForeignKey("EmployeeCategoryID")]
-        public EmployeeCategory? EmployeeCategory { get; set; }
+        public virtual EmployeeCategory? EmployeeCategory { get; set; }
 
         [ForeignKey("WorkScheduleID")]
-        public WorkSchedule? WorkSchedule { get; set; }
+        public virtual WorkSchedule? WorkSchedule { get; set; }
 
-        // Collections
-        public ICollection<Attendance>? Attendances { get; set; }
-        public ICollection<Leave>? Leaves { get; set; }
-        public ICollection<Payroll>? Payrolls { get; set; }
-        public ICollection<MedicalQualification>? MedicalQualifications { get; set; }
-        public ICollection<OnCallSchedule>? OnCallSchedules { get; set; }
-        public ICollection<WardAssignment>? WardAssignments { get; set; }
-        public ICollection<SalaryStructure>? SalaryStructures { get; set; }
-        public ICollection<EmployeeAllowance>? EmployeeAllowances { get; set; }
-        public ICollection<EPFETFInfo>? EPFETFInfo { get; set; }
-        public ICollection<EmployeePerformance>? PerformanceReviews { get; set; }
-        public ICollection<EmployeePerformance>? GivenReviews { get; set; }
-        public ICollection<Loan>? Loans { get; set; }
+        // Collections - make virtual for lazy loading
+        public virtual ICollection<Attendance>? Attendances { get; set; }
+        public virtual ICollection<Leave>? Leaves { get; set; }
+        public virtual ICollection<Payroll>? Payrolls { get; set; }
+        public virtual ICollection<MedicalQualification>? MedicalQualifications { get; set; }
+        public virtual ICollection<OnCallSchedule>? OnCallSchedules { get; set; }
+        public virtual ICollection<WardAssignment>? WardAssignments { get; set; }
+        public virtual ICollection<SalaryStructure>? SalaryStructures { get; set; }
+        public virtual ICollection<EmployeeAllowance>? EmployeeAllowances { get; set; }
+        public virtual ICollection<EPFETFInfo>? EPFETFInfo { get; set; }
+        public virtual ICollection<EmployeePerformance>? PerformanceReviews { get; set; }
+        public virtual ICollection<EmployeePerformance>? GivenReviews { get; set; }
+        public virtual ICollection<Loan>? Loans { get; set; }
     }
-
 }

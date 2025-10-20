@@ -4,6 +4,7 @@ namespace CoopHospitalHRM.Models.ViewModels
 {
     public class EmployeeListVM
     {
+        // Properties for individual employee
         public int EmployeeID { get; set; }
         public string EmployeeCode { get; set; } = string.Empty;
         public string FullName { get; set; } = string.Empty;
@@ -16,10 +17,12 @@ namespace CoopHospitalHRM.Models.ViewModels
         public string Status { get; set; } = "Active";
         public int? YearsOfService { get; set; }
 
+        // Properties for the list view
+        public List<EmployeeListVM>? Employees { get; set; }
+
         // Search and filter properties
         public string? SearchTerm { get; set; }
-        public int? DepartmentFilter { get; set; }
-        public int? CategoryFilter { get; set; }
+        public string? DepartmentFilter { get; set; }
         public string? StatusFilter { get; set; }
 
         // Pagination
@@ -29,8 +32,6 @@ namespace CoopHospitalHRM.Models.ViewModels
         public int TotalPages => (int)Math.Ceiling(TotalCount / (double)PageSize);
 
         public List<SelectListItem>? DepartmentFilters { get; set; }
-        public List<SelectListItem>? CategoryFilters { get; set; }
         public List<SelectListItem>? StatusFilters { get; set; }
     }
-
 }

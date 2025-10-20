@@ -1,38 +1,268 @@
-﻿@using CoopHospitalHRM.Models.Entities
+﻿@model CoopHospitalHRM.Models.ViewModels.EmployeeListVM
+@{
+    ViewData["Title"] = "Employee Management";
+}
 
-@model IEnumerable<Employee>
+<div class="container-fluid p-0">
+    <div class="container">
+        <!-- Debug Information (remove after fixing) -->
+        @if (Model.Employees == null)
+        {
+            <div class="alert alert-warning">
+                <h5>Debug Info: Model.Employees is NULL</h5>
+                <p>TotalCount: @Model.TotalCount</p>
+                <p>SearchTerm: @Model.SearchTerm</p>
+                <a href="@Url.Action("DebugData")" class="btn btn-sm btn-warning">Check Raw Data</a>
+            </div>
+        }
+        else if (!Model.Employees.Any())
+        {
+            <div class="alert alert-info">
+                <h5>Debug Info: Model.Employees is empty but exists</h5>
+                <p>TotalCount: @Model.TotalCount</p>
+                <p>SearchTerm: @Model.SearchTerm</p>
+                <p>DepartmentFilter: @Model.DepartmentFilter</p>
+                <a href="@Url.Action("DebugData")" class="btn btn-sm btn-info">Check Raw Data</a>
+            </div>
+        }
 
-<div class="card">
-    <div class="card-header">
-        <h3>Employee Management</h3>
-        <a asp-action="Create" class="btn btn-primary">Add New Employee</a>
-    </div>
-    <div class="card-body">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Employee Code</th>
-                    <th>Full Name</th>
-                    <th>Department</th>
-                    <th>Designation</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var employee in Model)
-                {
-                    <tr>
-                        <td>@employee.EmployeeCode</td>
-                        <td>@employee.FullName</td>
-                        <td>@employee.Department?.DepartmentName</td>
-                        <td>@employee.Designation?.DesignationName</td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@employee.EmployeeID" class="btn btn-sm btn-warning">Edit</a>
-                            <a asp-action="Details" asp-route-id="@employee.EmployeeID" class="btn btn-sm btn-info">Details</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <!-- Stats Cards -->
+        <div class="row mb-4" id="statsCards">
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-user-md"></i>
+                    <div class="number" id="totalEmployees">0</div>
+                    <div class="label">Total Employees</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-stethoscope"></i>
+                    <div class="number" id="medicalStaff">0</div>
+                    <div class="label">Medical Staff</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-user-nurse"></i>
+                    <div class="number" id="nursingStaff">0</div>
+                    <div class="label">Nursing Staff</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-user-cog"></i>
+                    <div class="number" id="administrative">0</div>
+                    <div class="label">Administrative</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="hospital-card">
+            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                <h3><i class="fas fa-users me-2"></i>Employee Management</h3>
+                <div class="d-flex align-items-center flex-wrap mt-2 mt-md-0">
+                    <form method="get" class="d-flex align-items-center flex-wrap">
+                        <div class="search-container me-3 mb-2 mb-md-0">
+                            <i class="fas fa-search"></i>
+                            <input type="text" class="form-control" name="searchTerm" placeholder="Search employees..." value="@Model.SearchTerm">
+                        </div>
+                        <div class="filter-dropdown me-3 mb-2 mb-md-0">
+                            <select class="form-select" name="departmentFilter" onchange="this.form.submit()">
+                                <option value="All">All Departments</option>
+                                @if (Model.DepartmentFilters != null)
+                                {
+                                    foreach (var dept in Model.DepartmentFilters)
+                                    {
+                                        <option value="@dept.Value" selected="@(dept.Value == Model.DepartmentFilter)">@dept.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="filter-dropdown me-3 mb-2 mb-md-0">
+                            <select class="form-select" name="statusFilter" onchange="this.form.submit()">
+                                <option value="All">All Status</option>
+                                @if (Model.StatusFilters != null)
+                                {
+                                    foreach (var status in Model.StatusFilters)
+                                    {
+                                        <option value="@status.Value" selected="@(status.Value == Model.StatusFilter)">@status.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <input type="hidden" name="page" value="1" />
+                    </form>
+                    <a href="@Url.Action("Create", "Employee")" class="btn btn-hospital mb-2 mb-md-0">
+                        <i class="fas fa-plus me-2"></i>Add New Employee
+                    </a>
+                    <a href="@Url.Action("DebugData")" class="btn btn-outline-secondary mb-2 mb-md-0 ms-2">
+                        <i class="fas fa-bug me-2"></i>Debug
+                    </a>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table hospital-table">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Department</th>
+                                <th>Designation</th>
+                                <th>Contact</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Employees != null && Model.Employees.Any())
+                            {
+                                foreach (var employee in Model.Employees)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="employee-info">
+                                                <div class="employee-avatar">@GetInitials(employee.FullName)</div>
+                                                <div>
+                                                    <div class="employee-name">@employee.FullName</div>
+                                                    <div class="employee-code">@employee.EmployeeCode</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="department-badge">@employee.DepartmentName</span>
+                                        </td>
+                                        <td>@employee.DesignationName</td>
+                                        <td>
+                                            <div>@employee.Email</div>
+                                            <div class="text-muted small">@employee.Phone</div>
+                                        </td>
+                                        <td>
+                                            @if (employee.Status == "Active")
+                                            {
+                                                <span class="badge bg-success">@employee.Status</span>
+                                            }
+                                            else if (employee.Status == "On Leave")
+                                            {
+                                                <span class="badge bg-warning text-dark">@employee.Status</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary">@employee.Status</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <a href="@Url.Action("Edit", "Employee", new { id = employee.EmployeeID })" class="btn btn-sm btn-hospital-outline">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="@Url.Action("Details", "Employee", new { id = employee.EmployeeID })" class="btn btn-sm btn-hospital-outline">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="@Url.Action("Create", "Leave", new { employeeId = employee.EmployeeID })" class="btn btn-sm btn-hospital-outline">
+                                                    <i class="fas fa-file-medical"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center py-4">
+                                        <div class="text-muted">
+                                            <i class="fas fa-users fa-2x mb-3"></i>
+                                            <p>No employees found.</p>
+                                            <p class="small">Total Count: @Model.TotalCount | Search: "@Model.SearchTerm" | Department: "@Model.DepartmentFilter"</p>
+                                            @if (!string.IsNullOrEmpty(Model.SearchTerm))
+                                            {
+                                                <p>Try adjusting your search criteria.</p>
+                                            }
+                                            <a href="@Url.Action("Index", new { searchTerm = "", departmentFilter = "All", statusFilter = "All" })" class="btn btn-sm btn-hospital mt-2">
+                                                Clear Filters
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @if (Model.TotalPages > 1)
+            {
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="text-muted">
+                        Showing @((Model.CurrentPage - 1) * Model.PageSize + 1) to @Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalCount) of @Model.TotalCount employees
+                    </div>
+                    <nav aria-label="Employee pagination">
+                        <ul class="pagination mb-0">
+                            <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage - 1, searchTerm = Model.SearchTerm, departmentFilter = Model.DepartmentFilter, statusFilter = Model.StatusFilter })" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { page = i, searchTerm = Model.SearchTerm, departmentFilter = Model.DepartmentFilter, statusFilter = Model.StatusFilter })">@i</a>
+                                </li>
+                            }
+
+                            <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage + 1, searchTerm = Model.SearchTerm, departmentFilter = Model.DepartmentFilter, statusFilter = Model.StatusFilter })">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            }
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEmployeeStats();
+        });
+
+        function loadEmployeeStats() {
+            fetch('@Url.Action("GetEmployeeStats", "Employee")')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('totalEmployees').textContent = data.totalEmployees;
+                    document.getElementById('medicalStaff').textContent = data.medicalStaff;
+                    document.getElementById('nursingStaff').textContent = data.nursingStaff;
+                    document.getElementById('administrative').textContent = data.administrative;
+                })
+                .catch(error => {
+                    console.error('Error loading statistics:', error);
+                });
+        }
+
+        let searchTimeout;
+        document.querySelector('input[name="searchTerm"]')?.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                this.form.submit();
+            }, 500);
+        });
+    </script>
+}
+
+@functions {
+    private string GetInitials(string fullName)
+    {
+        if (string.IsNullOrEmpty(fullName))
+            return "??";
+
+        var names = fullName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (names.Length >= 2)
+            return $"{names[0][0]}{names[1][0]}".ToUpper();
+        else if (names.Length == 1 && names[0].Length >= 2)
+            return names[0].Substring(0, 2).ToUpper();
+        else
+            return "??";
+    }
+}

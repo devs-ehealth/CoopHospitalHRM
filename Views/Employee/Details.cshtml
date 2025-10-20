@@ -1,180 +1,267 @@
 ﻿@model CoopHospitalHRM.Models.Entities.Employee
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Employee Details";
 }
 
-<h1>Details</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <!-- Header Card -->
+            <div class="hospital-card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0">
+                            <i class="fas fa-user-circle me-2"></i>Employee Details
+                        </h3>
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@Model.EmployeeID" class="btn btn-hospital me-2">
+                                <i class="fas fa-edit me-2"></i>Edit
+                            </a>
+                            <a asp-action="Index" class="btn btn-hospital-outline">
+                                <i class="fas fa-arrow-left me-2"></i>Back to List
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<div>
-    <h4>Employee</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmployeeCode)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmployeeCode)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InitialName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InitialName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NIC)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NIC)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.JoinDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.JoinDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MedicalLicenseNo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MedicalLicenseNo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Specialization)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Specialization)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.YearsOfExperience)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.YearsOfExperience)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmergencyContact)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmergencyContact)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmergencyPhone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmergencyPhone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BloodGroup)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BloodGroup)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BankAccountNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BankAccountNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BankName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BankName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BranchName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BranchName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Department.DepartmentName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Designation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Designation.DesignationName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SalaryGrade)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SalaryGrade.GradeName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmployeeCategory)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmployeeCategory.CategoryName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WorkSchedule)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WorkSchedule.WorkScheduleID)
-        </dd>
-    </dl>
+            <!-- Employee Profile Card -->
+            <div class="hospital-card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <div class="employee-avatar-large mx-auto mb-3">
+                                @GetInitials(Model.FullName)
+                            </div>
+                            <h4 class="text-hospital-red">@Model.FullName</h4>
+                            <p class="text-muted">@Model.EmployeeCode</p>
+                            <div class="badge @GetStatusBadgeClass(Model.Status)">@Model.Status</div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <!-- Personal Information -->
+                                <div class="col-md-6 mb-4">
+                                    <h5 class="text-hospital-red border-bottom pb-2 mb-3">
+                                        <i class="fas fa-user me-2"></i>Personal Information
+                                    </h5>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Name with Initials:</label>
+                                        <p>@Model.InitialName</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">NIC Number:</label>
+                                        <p>@Model.NIC</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Date of Birth:</label>
+                                        <p>@Model.DOB?.ToString("MMM dd, yyyy")</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Gender:</label>
+                                        <p>@Model.Gender</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Blood Group:</label>
+                                        <p>@Model.BloodGroup</p>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Information -->
+                                <div class="col-md-6 mb-4">
+                                    <h5 class="text-hospital-red border-bottom pb-2 mb-3">
+                                        <i class="fas fa-address-book me-2"></i>Contact Information
+                                    </h5>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Email:</label>
+                                        <p><a href="mailto:@Model.Email" class="text-decoration-none">@Model.Email</a></p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Phone:</label>
+                                        <p><a href="tel:@Model.Phone" class="text-decoration-none">@Model.Phone</a></p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Address:</label>
+                                        <p>@Model.Address</p>
+                                    </div>
+                                </div>
+
+                                <!-- Employment Details -->
+                                <div class="col-md-6 mb-4">
+                                    <h5 class="text-hospital-red border-bottom pb-2 mb-3">
+                                        <i class="fas fa-briefcase me-2"></i>Employment Details
+                                    </h5>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Join Date:</label>
+                                        <p>@Model.JoinDate?.ToString("MMM dd, yyyy")</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Department:</label>
+                                        <p><span class="department-badge">@Model.Department?.DepartmentName</span></p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Designation:</label>
+                                        <p>@Model.Designation?.DesignationName</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Grade:</label>
+                                        <p>@Model.SalaryGrade?.GradeName</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Category:</label>
+                                        <p>@Model.EmployeeCategory?.CategoryName</p>
+                                    </div>
+                                </div>
+
+                                <!-- Medical & Emergency -->
+                                <div class="col-md-6 mb-4">
+                                    <h5 class="text-hospital-red border-bottom pb-2 mb-3">
+                                        <i class="fas fa-stethoscope me-2"></i>Medical Details
+                                    </h5>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Medical License:</label>
+                                        <p>@Model.MedicalLicenseNo</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Specialization:</label>
+                                        <p>@Model.Specialization</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Experience:</label>
+                                        <p>@Model.YearsOfExperience years</p>
+                                    </div>
+                                    
+                                    <h5 class="text-hospital-red border-bottom pb-2 mb-3 mt-4">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>Emergency Contact
+                                    </h5>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Contact Person:</label>
+                                        <p>@Model.EmergencyContact</p>
+                                    </div>
+                                    <div class="info-group">
+                                        <label class="fw-semibold">Emergency Phone:</label>
+                                        <p><a href="tel:@Model.EmergencyPhone" class="text-decoration-none">@Model.EmergencyPhone</a></p>
+                                    </div>
+                                </div>
+
+                                <!-- Bank Details -->
+                                <div class="col-12">
+                                    <h5 class="text-hospital-red border-bottom pb-2 mb-3">
+                                        <i class="fas fa-university me-2"></i>Bank Details
+                                    </h5>
+                                    <div class="row">
+                                        <div class="col-md-4 info-group">
+                                            <label class="fw-semibold">Account Number:</label>
+                                            <p>@Model.BankAccountNumber</p>
+                                        </div>
+                                        <div class="col-md-4 info-group">
+                                            <label class="fw-semibold">Bank Name:</label>
+                                            <p>@Model.BankName</p>
+                                        </div>
+                                        <div class="col-md-4 info-group">
+                                            <label class="fw-semibold">Branch Name:</label>
+                                            <p>@Model.BranchName</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- System Information -->
+                                <div class="col-12 mt-4">
+                                    <h5 class="text-hospital-red border-bottom pb-2 mb-3">
+                                        <i class="fas fa-info-circle me-2"></i>System Information
+                                    </h5>
+                                    <div class="row">
+                                        <div class="col-md-6 info-group">
+                                            <label class="fw-semibold">Created At:</label>
+                                            <p>@Model.CreatedAt?.ToString("MMM dd, yyyy HH:mm")</p>
+                                        </div>
+                                        <div class="col-md-6 info-group">
+                                            <label class="fw-semibold">Last Updated:</label>
+                                            <p>@Model.UpdatedAt?.ToString("MMM dd, yyyy HH:mm")</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.EmployeeID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Styles {
+    <style>
+        .employee-avatar-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--hospital-red), var(--hospital-dark-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .info-group {
+            margin-bottom: 1rem;
+        }
+
+        .info-group label {
+            color: var(--hospital-dark-gray);
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .info-group p {
+            margin: 0;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--hospital-border);
+        }
+
+        .badge-active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge-inactive {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .badge-on-leave {
+            background-color: #ffc107;
+            color: black;
+        }
+    </style>
+}
+
+@functions {
+    private string GetInitials(string fullName)
+    {
+        if (string.IsNullOrEmpty(fullName))
+            return "??";
+            
+        var names = fullName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (names.Length >= 2)
+            return $"{names[0][0]}{names[1][0]}".ToUpper();
+        else if (names.Length == 1)
+            return names[0].Length >= 2 ? names[0].Substring(0, 2).ToUpper() : names[0].ToUpper();
+        else
+            return "??";
+    }
+
+    private string GetStatusBadgeClass(string status)
+    {
+        return status?.ToLower() switch
+        {
+            "active" => "badge-active",
+            "inactive" => "badge-inactive",
+            "on leave" => "badge-on-leave",
+            _ => "badge-secondary"
+        };
+    }
+}

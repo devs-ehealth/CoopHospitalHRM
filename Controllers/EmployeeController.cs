@@ -1,104 +1,159 @@
-﻿using CoopHospitalHRM.Models.Entities;
-using CoopHospitalHRM.Services;
+﻿using Microsoft.AspNetCore.Mvc;
 using CoopHospitalHRM.Models.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Linq;
-using System.Threading.Tasks;
+using CoopHospitalHRM.DataLibrary.BusinessLogics;
 
 namespace CoopHospitalHRM.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly IEmployeeService _employeeService;
+       
 
-        public EmployeeController(IEmployeeService employeeService)
+        
+
+        // GET: Employee/Index
+        public async Task<IActionResult> Index(string searchTerm, string departmentFilter, string statusFilter, int page = 1, int pageSize = 10)
         {
-            _employeeService = employeeService;
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            var employees = await _employeeService.GetAllEmployeesAsync();
-            return View(employees);
-        }
-
-        public async Task<IActionResult> Create()
-        {
-            var departments = await _employeeService.GetDepartmentsAsync();
-            var designations = await _employeeService.GetDesignationsAsync();
-
-            var model = new EmployeeVM
+            try
             {
-                Departments = departments.Select(d => new SelectListItem
-                {
-                    Value = d.DepartmentID.ToString(),
-                    Text = d.DepartmentName
-                }).ToList(),
-
-                Designations = designations.Select(des => new SelectListItem
-                {
-                    Value = des.DesignationID.ToString(),
-                    Text = des.DesignationName
-                }).ToList()
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(EmployeeVM model)
-        {
-            if (ModelState.IsValid)
-            {
-                var employee = new Employee
-                {
-                    EmployeeCode = model.EmployeeCode,
-                    FullName = model.FullName,
-                    NIC = model.NIC,
-                    DOB = model.DOB,
-                    Gender = model.Gender,
-                    Email = model.Email,
-                    Phone = model.Phone,
-                    Address = model.Address,
-                    JoinDate = model.JoinDate,
-                    DepartmentID = model.DepartmentID,
-                    DesignationID = model.DesignationID,
-                    GradeID = model.GradeID,
-                    EmployeeCategoryID = model.EmployeeCategoryID,
-                    WorkScheduleID = model.WorkScheduleID,
-                    MedicalLicenseNo = model.MedicalLicenseNo,
-                    Specialization = model.Specialization,
-                    YearsOfExperience = model.YearsOfExperience,
-                    EmergencyContact = model.EmergencyContact,
-                    EmergencyPhone = model.EmergencyPhone,
-                    BloodGroup = model.BloodGroup,
-                    BankAccountNumber = model.BankAccountNumber,
-                    BankName = model.BankName,
-                    BranchName = model.BranchName,
-                    Status = model.Status
-                };
-
-                await _employeeService.CreateEmployeeAsync(employee);
-                return RedirectToAction(nameof(Index));
+                var emp = new HRLogics().EmpDetails();
+                return View(emp);
             }
-
-            // If model validation fails, re-populate dropdowns
-            model.Departments = (await _employeeService.GetDepartmentsAsync())
-                .Select(d => new SelectListItem
-                {
-                    Value = d.DepartmentID.ToString(),
-                    Text = d.DepartmentName
-                }).ToList();
-
-            model.Designations = (await _employeeService.GetDesignationsAsync())
-                .Select(des => new SelectListItem
-                {
-                    Value = des.DesignationID.ToString(),
-                    Text = des.DesignationName
-                }).ToList();
-
-            return View(model);
+            catch (Exception ex)
+            {
+                
+                TempData["ErrorMessage"] = "Error loading employees. Please try again.";
+                return View(new EmployeeListVM { Employees = new List<EmployeeListVM>() });
+            }
         }
+
+        // GET: Employee/Details/5
+        //public async Task<IActionResult> Details(int id)
+        //{
+        //    try
+        //    {
+        //        var employee = await _employeeService.GetEmployeeDetailAsync(id);
+
+        //        if (employee == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return View(employee);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error loading employee details for ID {EmployeeId}", id);
+        //        TempData["ErrorMessage"] = "Error loading employee details.";
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //}
+
+        //// GET: Employee Statistics for Dashboard
+        //[HttpGet]
+        //public async Task<JsonResult> GetEmployeeStats()
+        //{
+        //    try
+        //    {
+        //        var stats = await _employeeService.GetEmployeeStatsAsync();
+        //        return Json(stats);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error getting employee statistics");
+        //        return Json(new EmployeeStatsVM());
+        //    }
+        //}
+
+        //// GET: Employee/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        //// POST: Employee/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(EmployeeVM employee)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            var result = await _employeeService.CreateEmployeeAsync(employee);
+        //            if (result)
+        //            {
+        //                TempData["SuccessMessage"] = "Employee created successfully!";
+        //                return RedirectToAction(nameof(Index));
+        //            }
+        //            TempData["ErrorMessage"] = "Error creating employee.";
+        //        }
+        //        return View(employee);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error creating employee");
+        //        TempData["ErrorMessage"] = "Error creating employee. Please try again.";
+        //        return View(employee);
+        //    }
+        //}
+
+        //// GET: Employee/Edit/5
+        //public async Task<IActionResult> Edit(int id)
+        //{
+        //    try
+        //    {
+        //        var employee = await _employeeService.GetEmployeeDetailAsync(id);
+        //        if (employee == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        // Convert to EmployeeVM (you'll need mapping logic here)
+        //        var employeeVM = new EmployeeVM
+        //        {
+        //            EmployeeID = employee.EmployeeID,
+        //            EmployeeCode = employee.EmployeeCode,
+        //            FullName = employee.FullName,
+        //            // ... map other properties
+        //        };
+        //        return View(employeeVM);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error loading employee for edit");
+        //        TempData["ErrorMessage"] = "Error loading employee.";
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //}
+
+        //// POST: Employee/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, EmployeeVM employee)
+        //{
+        //    try
+        //    {
+        //        if (id != employee.EmployeeID)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        if (ModelState.IsValid)
+        //        {
+        //            var result = await _employeeService.UpdateEmployeeAsync(employee);
+        //            if (result)
+        //            {
+        //                TempData["SuccessMessage"] = "Employee updated successfully!";
+        //                return RedirectToAction(nameof(Index));
+        //            }
+        //            TempData["ErrorMessage"] = "Error updating employee.";
+        //        }
+        //        return View(employee);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error updating employee");
+        //        TempData["ErrorMessage"] = "Error updating employee. Please try again.";
+        //        return View(employee);
+        //    }
+        //}
     }
 }

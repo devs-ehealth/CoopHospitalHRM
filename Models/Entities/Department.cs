@@ -1,31 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CoopHospitalHRM.Models.Entities;
+using System.ComponentModel.DataAnnotations;
 
-namespace CoopHospitalHRM.Models.Entities
+public class Department
 {
-    public class Department
-    {
-        [Key]
-        public int DepartmentID { get; set; }
+    [Key]
+    public int DepartmentID { get; set; }
 
-        [StringLength(20)]
-        public string? DepartmentCode { get; set; }
+    [StringLength(20)]
+    public string? DepartmentCode { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string DepartmentName { get; set; } = string.Empty;
+    [Required]
+    [StringLength(100)]
+    public string DepartmentName { get; set; } = string.Empty;
 
-        [StringLength(20)]
-        public string? DepartmentType { get; set; }
+    [StringLength(20)]
+    public string? DepartmentType { get; set; }
 
-        [StringLength(500)]
-        public string? Description { get; set; }
+    [StringLength(500)]
+    public string? Description { get; set; }
 
-        public bool? IsActive { get; set; } = true;
-        public DateTime? CreatedAt { get; set; } = DateTime.Now;
-        public DateTime? UpdatedAt { get; set; }
+    public bool? IsActive { get; set; } = true;
 
-        // Navigation
-        public ICollection<Employee>? Employees { get; set; }
-    }
+    public DateTime? CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? UpdatedAt { get; set; }
 
+    // Navigation property
+    public virtual ICollection<Employee>? Employees { get; set; }
 }

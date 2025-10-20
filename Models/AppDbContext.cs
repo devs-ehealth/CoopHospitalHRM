@@ -47,44 +47,40 @@ namespace CoopHospitalHRM.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            // =============================================
-            // TABLE MAPPINGS - Map to your actual SQL tables
-            // =============================================
+            // Master Tables mapping - FIXED TABLE NAMES
+            modelBuilder.Entity<Department>().ToTable("HR_Departments"); // Was: HR_Department
+            modelBuilder.Entity<EmployeeCategory>().ToTable("HR_EmployeeCategories"); // Was: HR_EmployeeCategory
+            modelBuilder.Entity<Designation>().ToTable("HR_Designations"); // Was: HR_Designation
+            modelBuilder.Entity<SalaryGrade>().ToTable("HR_SalaryGrades"); // Was: HR_SalaryGrade
+            modelBuilder.Entity<WorkSchedule>().ToTable("HR_WorkSchedules"); // Was: HR_WorkSchedul
+            modelBuilder.Entity<LeaveType>().ToTable("HR_LeaveTypes"); // Was: HR_LeaveType
+            modelBuilder.Entity<HospitalAllowance>().ToTable("HR_HospitalAllowances"); // Was: HR_HospitalAllowance
+            modelBuilder.Entity<SystemRole>().ToTable("HR_SystemRoles"); // Was: HR_SystemRole
 
-            // Master Tables mapping
-            modelBuilder.Entity<Department>().ToTable("HR_Departments");
-            modelBuilder.Entity<EmployeeCategory>().ToTable("HR_EmployeeCategories");
-            modelBuilder.Entity<Designation>().ToTable("HR_Designations");
-            modelBuilder.Entity<SalaryGrade>().ToTable("HR_SalaryGrades");
-            modelBuilder.Entity<WorkSchedule>().ToTable("HR_WorkSchedules");
-            modelBuilder.Entity<LeaveType>().ToTable("HR_LeaveTypes");
-            modelBuilder.Entity<HospitalAllowance>().ToTable("HR_HospitalAllowances");
-            modelBuilder.Entity<SystemRole>().ToTable("HR_SystemRoles");
-            
-            // Core Tables mapping
-            modelBuilder.Entity<Employee>().ToTable("HR_Employees");
-            modelBuilder.Entity<Attendance>().ToTable("HR_Attendance");
-            modelBuilder.Entity<Leave>().ToTable("HR_Leaves");
-            modelBuilder.Entity<LeaveBalance>().ToTable("HR_LeaveBalances");
-            modelBuilder.Entity<SalaryStructure>().ToTable("HR_SalaryStructures");
-            modelBuilder.Entity<EmployeeAllowance>().ToTable("HR_EmployeeAllowances");
-            modelBuilder.Entity<Payroll>().ToTable("HR_Payrolls");
-            modelBuilder.Entity<PayrollTransaction>().ToTable("HR_PayrollTransactions");
-            
-            // EPF/ETF Tables mapping
-            modelBuilder.Entity<EPFETFInfo>().ToTable("HR_EPFETFInfo");
-            modelBuilder.Entity<EPFContribution>().ToTable("HR_EPFContributions");
-            modelBuilder.Entity<ETFContribution>().ToTable("HR_ETFContributions");
-            
-            // Hospital Specific Tables mapping
-            modelBuilder.Entity<MedicalQualification>().ToTable("HR_MedicalQualifications");
-            modelBuilder.Entity<OnCallSchedule>().ToTable("HR_OnCallSchedule");
-            modelBuilder.Entity<WardAssignment>().ToTable("HR_WardAssignments");
-            
-            // Additional Tables mapping
-            modelBuilder.Entity<Loan>().ToTable("HR_Loans");
-            modelBuilder.Entity<SystemUser>().ToTable("HR_SystemUsers");
-            modelBuilder.Entity<EmployeePerformance>().ToTable("HR_EmployeePerformance");
+            // Core Tables mapping - FIXED TABLE NAMES
+            modelBuilder.Entity<Employee>().ToTable("HR_Employees"); // This is correct
+            modelBuilder.Entity<Attendance>().ToTable("HR_Attendance"); // This is correct
+            modelBuilder.Entity<Leave>().ToTable("HR_Leaves"); // Was: HR_Leave
+            modelBuilder.Entity<LeaveBalance>().ToTable("HR_LeaveBalances"); // Was: HR_LeaveBalance
+            modelBuilder.Entity<SalaryStructure>().ToTable("HR_SalaryStructures"); // Was: HR_SalaryStructure
+            modelBuilder.Entity<EmployeeAllowance>().ToTable("HR_EmployeeAllowances"); // Was: HR_EmployeeAllowance
+            modelBuilder.Entity<Payroll>().ToTable("HR_Payrolls"); // Was: HR_Payroll
+            modelBuilder.Entity<PayrollTransaction>().ToTable("HR_PayrollTransactions"); // Was: HR_PayrollTransaction
+
+            // EPF/ETF Tables mapping - FIXED TABLE NAMES
+            modelBuilder.Entity<EPFETFInfo>().ToTable("HR_EPFETFInfo"); // This is correct
+            modelBuilder.Entity<EPFContribution>().ToTable("HR_EPFContributions"); // Was: HR_EPFContribution
+            modelBuilder.Entity<ETFContribution>().ToTable("HR_ETFContributions"); // Was: HR_ETFContribution
+
+            // Hospital Specific Tables mapping - FIXED TABLE NAMES
+            modelBuilder.Entity<MedicalQualification>().ToTable("HR_MedicalQualifications"); // Was: HR_MedicalQualification
+            modelBuilder.Entity<OnCallSchedule>().ToTable("HR_OnCallSchedule"); // This is correct
+            modelBuilder.Entity<WardAssignment>().ToTable("HR_WardAssignments"); // Was: HR_WardAssignment
+
+            // Additional Tables mapping - FIXED TABLE NAMES
+            modelBuilder.Entity<Loan>().ToTable("HR_Loans"); // Was: HR_Loan
+            modelBuilder.Entity<SystemUser>().ToTable("HR_SystemUsers"); // Was: HR_SystemUser
+            modelBuilder.Entity<EmployeePerformance>().ToTable("HR_EmployeePerformance"); // This is correct
 
             // =============================================
             // RELATIONSHIP CONFIGURATIONS

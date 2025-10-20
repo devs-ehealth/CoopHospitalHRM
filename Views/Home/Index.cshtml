@@ -1,0 +1,424 @@
+@{
+    ViewData["Title"] = "Hospital HR Dashboard";
+}
+
+<div class="container-fluid">
+    <!-- Welcome Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="hospital-card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0">
+                            <i class="fas fa-tachometer-alt me-2"></i>HR Dashboard
+                        </h3>
+                        <div class="text-muted">
+                            <i class="fas fa-calendar me-1"></i>
+                            @DateTime.Now.ToString("dddd, MMMM dd, yyyy")
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="text-hospital-red mb-2">Welcome back, Administrator!</h4>
+                            <p class="text-muted mb-0">Here's what's happening with your hospital staff today.</p>
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            <div class="btn-group">
+                                <button class="btn btn-hospital-outline">
+                                    <i class="fas fa-sync-alt me-2"></i>Refresh
+                                </button>
+                                <button class="btn btn-hospital">
+                                    <i class="fas fa-download me-2"></i>Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="stats-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="number">142</div>
+                        <div class="label">Total Employees</div>
+                    </div>
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="mt-3">
+                    <small><i class="fas fa-arrow-up text-success me-1"></i> 12% increase this month</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="stats-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="number">8</div>
+                        <div class="label">On Leave Today</div>
+                    </div>
+                    <i class="fas fa-bed"></i>
+                </div>
+                <div class="mt-3">
+                    <small><i class="fas fa-info-circle me-1"></i> 3 scheduled returns</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="stats-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="number">15</div>
+                        <div class="label">New Hires This Month</div>
+                    </div>
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="mt-3">
+                    <small><i class="fas fa-bell text-warning me-1"></i> 5 pending onboarding</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="stats-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="number">97%</div>
+                        <div class="label">Attendance Rate</div>
+                    </div>
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <div class="mt-3">
+                    <small><i class="fas fa-arrow-up text-success me-1"></i> 2% from last month</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Department Distribution -->
+        <div class="col-xl-6 col-lg-12 mb-4">
+            <div class="hospital-card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-sitemap me-2"></i>Department Distribution
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="department-chart">
+                                <canvas id="departmentChart" height="250"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="department-list">
+                                <div class="department-item d-flex justify-content-between align-items-center mb-3 p-2 rounded">
+                                    <div class="d-flex align-items-center">
+                                        <span class="department-color me-2" style="background-color: #c8102e; width: 12px; height: 12px; border-radius: 2px;"></span>
+                                        <span>Medical Staff</span>
+                                    </div>
+                                    <span class="badge bg-hospital-light text-hospital-red">48</span>
+                                </div>
+                                <div class="department-item d-flex justify-content-between align-items-center mb-3 p-2 rounded">
+                                    <div class="d-flex align-items-center">
+                                        <span class="department-color me-2" style="background-color: #dc3545; width: 12px; height: 12px; border-radius: 2px;"></span>
+                                        <span>Nursing Staff</span>
+                                    </div>
+                                    <span class="badge bg-hospital-light text-hospital-red">67</span>
+                                </div>
+                                <div class="department-item d-flex justify-content-between align-items-center mb-3 p-2 rounded">
+                                    <div class="d-flex align-items-center">
+                                        <span class="department-color me-2" style="background-color: #fd7e14; width: 12px; height: 12px; border-radius: 2px;"></span>
+                                        <span>Administrative</span>
+                                    </div>
+                                    <span class="badge bg-hospital-light text-hospital-red">27</span>
+                                </div>
+                                <div class="department-item d-flex justify-content-between align-items-center mb-3 p-2 rounded">
+                                    <div class="d-flex align-items-center">
+                                        <span class="department-color me-2" style="background-color: #20c997; width: 12px; height: 12px; border-radius: 2px;"></span>
+                                        <span>Support Staff</span>
+                                    </div>
+                                    <span class="badge bg-hospital-light text-hospital-red">15</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="col-xl-6 col-lg-12 mb-4">
+            <div class="hospital-card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bell me-2"></i>Recent Activities
+                    </h5>
+                    <a href="#" class="btn btn-sm btn-hospital-outline">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="activity-list">
+                        <div class="activity-item d-flex align-items-start p-3 border-bottom">
+                            <div class="activity-icon me-3">
+                                <div class="employee-avatar bg-success bg-opacity-10 text-success">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                            </div>
+                            <div class="activity-content flex-grow-1">
+                                <h6 class="mb-1">New Employee Onboarded</h6>
+                                <p class="mb-1 text-muted">Dr. Sarah Johnson joined the Cardiology department</p>
+                                <small class="text-muted"><i class="fas fa-clock me-1"></i>2 hours ago</small>
+                            </div>
+                        </div>
+                        <div class="activity-item d-flex align-items-start p-3 border-bottom">
+                            <div class="activity-icon me-3">
+                                <div class="employee-avatar bg-warning bg-opacity-10 text-warning">
+                                    <i class="fas fa-calendar-times"></i>
+                                </div>
+                            </div>
+                            <div class="activity-content flex-grow-1">
+                                <h6 class="mb-1">Leave Request</h6>
+                                <p class="mb-1 text-muted">Michael Wilson requested emergency leave</p>
+                                <small class="text-muted"><i class="fas fa-clock me-1"></i>5 hours ago</small>
+                            </div>
+                        </div>
+                        <div class="activity-item d-flex align-items-start p-3 border-bottom">
+                            <div class="activity-icon me-3">
+                                <div class="employee-avatar bg-info bg-opacity-10 text-info">
+                                    <i class="fas fa-file-contract"></i>
+                                </div>
+                            </div>
+                            <div class="activity-content flex-grow-1">
+                                <h6 class="mb-1">Contract Renewal</h6>
+                                <p class="mb-1 text-muted">3 employee contracts expiring next week</p>
+                                <small class="text-muted"><i class="fas fa-clock me-1"></i>1 day ago</small>
+                            </div>
+                        </div>
+                        <div class="activity-item d-flex align-items-start p-3">
+                            <div class="activity-icon me-3">
+                                <div class="employee-avatar bg-primary bg-opacity-10 text-primary">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                            </div>
+                            <div class="activity-content flex-grow-1">
+                                <h6 class="mb-1">Performance Review</h6>
+                                <p class="mb-1 text-muted">Quarterly reviews completed for Nursing staff</p>
+                                <small class="text-muted"><i class="fas fa-clock me-1"></i>2 days ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Quick Actions -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="hospital-card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bolt me-2"></i>Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <a asp-controller="Employee" asp-action="Create" class="quick-action-card text-decoration-none">
+                                <div class="card border-0 bg-hospital-light text-center p-3 h-100">
+                                    <div class="quick-action-icon mb-2">
+                                        <i class="fas fa-user-plus fa-2x text-hospital-red"></i>
+                                    </div>
+                                    <h6 class="mb-0">Add Employee</h6>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="quick-action-card text-decoration-none">
+                                <div class="card border-0 bg-hospital-light text-center p-3 h-100">
+                                    <div class="quick-action-icon mb-2">
+                                        <i class="fas fa-file-invoice fa-2x text-hospital-red"></i>
+                                    </div>
+                                    <h6 class="mb-0">Generate Report</h6>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="quick-action-card text-decoration-none">
+                                <div class="card border-0 bg-hospital-light text-center p-3 h-100">
+                                    <div class="quick-action-icon mb-2">
+                                        <i class="fas fa-calendar-check fa-2x text-hospital-red"></i>
+                                    </div>
+                                    <h6 class="mb-0">Manage Leave</h6>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="quick-action-card text-decoration-none">
+                                <div class="card border-0 bg-hospital-light text-center p-3 h-100">
+                                    <div class="quick-action-icon mb-2">
+                                        <i class="fas fa-chart-bar fa-2x text-hospital-red"></i>
+                                    </div>
+                                    <h6 class="mb-0">View Analytics</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="hospital-card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-calendar-day me-2"></i>Upcoming Events
+                    </h5>
+                    <a href="#" class="btn btn-sm btn-hospital-outline">View Calendar</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="event-list">
+                        <div class="event-item p-3 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="event-date me-3 text-center">
+                                    <div class="fw-bold text-hospital-red">15</div>
+                                    <small class="text-muted">DEC</small>
+                                </div>
+                                <div class="event-details flex-grow-1">
+                                    <h6 class="mb-1">Staff Training Session</h6>
+                                    <p class="mb-1 text-muted">New protocol implementation</p>
+                                    <small class="text-muted"><i class="fas fa-clock me-1"></i>10:00 AM - Conference Room</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-item p-3 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="event-date me-3 text-center">
+                                    <div class="fw-bold text-hospital-red">18</div>
+                                    <small class="text-muted">DEC</small>
+                                </div>
+                                <div class="event-details flex-grow-1">
+                                    <h6 class="mb-1">Quarterly Review Meeting</h6>
+                                    <p class="mb-1 text-muted">Department heads meeting</p>
+                                    <small class="text-muted"><i class="fas fa-clock me-1"></i>2:00 PM - Board Room</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-item p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="event-date me-3 text-center">
+                                    <div class="fw-bold text-hospital-red">22</div>
+                                    <small class="text-muted">DEC</small>
+                                </div>
+                                <div class="event-details flex-grow-1">
+                                    <h6 class="mb-1">Health & Safety Audit</h6>
+                                    <p class="mb-1 text-muted">Annual compliance check</p>
+                                    <small class="text-muted"><i class="fas fa-clock me-1"></i>9:00 AM - All Departments</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Recognition -->
+        <div class="col-xl-4 col-md-12 mb-4">
+            <div class="hospital-card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-award me-2"></i>Staff Recognition
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="recognition-list">
+                        <div class="recognition-item text-center p-4 bg-hospital-light rounded mb-3">
+                            <div class="employee-avatar mx-auto mb-3" style="width: 60px; height: 60px;">
+                                <i class="fas fa-user-md fa-lg"></i>
+                            </div>
+                            <h6 class="mb-1">Dr. Sarah Mitchell</h6>
+                            <p class="text-muted mb-2">Emergency Department</p>
+                            <div class="badge bg-success">Employee of the Month</div>
+                        </div>
+                        <div class="recognition-item text-center p-3 bg-hospital-light rounded">
+                            <div class="employee-avatar mx-auto mb-2" style="width: 50px; height: 50px;">
+                                <i class="fas fa-user-nurse"></i>
+                            </div>
+                            <h6 class="mb-1">Nurse Robert Chen</h6>
+                            <p class="text-muted mb-2">ICU Department</p>
+                            <div class="badge bg-warning text-dark">5 Years Service</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Department Distribution Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('departmentChart').getContext('2d');
+            const departmentChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Medical Staff', 'Nursing Staff', 'Administrative', 'Support Staff'],
+                    datasets: [{
+                        data: [48, 67, 27, 15],
+                        backgroundColor: [
+                            '#c8102e',
+                            '#dc3545',
+                            '#fd7e14',
+                            '#20c997'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // Quick action card hover effects
+            const quickActionCards = document.querySelectorAll('.quick-action-card');
+            quickActionCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.querySelector('.card').style.transform = 'translateY(-5px)';
+                    this.querySelector('.card').style.boxShadow = '0 8px 15px rgba(0,0,0,0.1)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.querySelector('.card').style.transform = 'translateY(0)';
+                    this.querySelector('.card').style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+}

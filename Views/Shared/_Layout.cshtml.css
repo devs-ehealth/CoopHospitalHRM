@@ -1,48 +1,491 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿/* ===== CSS Variables ===== */
+:root {
+    /* Hospital Color Scheme */
+    --hospital-red: #c8102e;
+    --hospital-light-red: #f8d7da;
+    --hospital-dark-red: #a00e24;
+    --hospital-white: #ffffff;
+    --hospital-light-gray: #f8f9fa;
+    --hospital-dark-gray: #343a40;
+    --hospital-border: #e9ecef;
+    
+    /* Spacing */
+    --header-height: 60px;
+    --footer-height: 60px;
 }
 
-a {
-  color: #0077cc;
+/* ===== Global Styles ===== */
+body {
+    background-color: var(--hospital-light-gray);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+/* ===== Header & Navigation ===== */
+.hospital-navbar {
+    background-color: var(--hospital-white) !important;
+    border-bottom: 3px solid var(--hospital-red) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: var(--header-height);
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.hospital-brand {
+    color: var(--hospital-dark-gray) !important;
+    font-weight: 600;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.hospital-brand i {
+    color: var(--hospital-red);
+    font-size: 1.5rem;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+/* Navigation Links */
+.navbar-nav .nav-link {
+    color: var(--hospital-dark-gray) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: var(--hospital-red) !important;
+    background-color: var(--hospital-light-red);
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+.navbar-nav .nav-link.active {
+    color: var(--hospital-red) !important;
+    background-color: var(--hospital-light-red);
+}
+
+/* User Dropdown */
+.navbar-nav .dropdown-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu {
+    border: 1px solid var(--hospital-border);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--hospital-light-red);
+    color: var(--hospital-dark-red);
+}
+
+/* ===== Main Content ===== */
+.container-fluid {
+    flex: 1;
+    padding: 0 15px;
+}
+
+main {
+    padding-top: 1rem;
+}
+
+/* ===== Footer ===== */
+.hospital-footer {
+    background-color: var(--hospital-white);
+    border-top: 1px solid var(--hospital-border) !important;
+    min-height: var(--footer-height);
+    margin-top: auto;
+}
+
+.hospital-footer a {
+    transition: color 0.2s ease;
+}
+
+.hospital-footer a:hover {
+    color: var(--hospital-red) !important;
+}
+
+/* ===== Component Styles ===== */
+
+/* Buttons */
+.btn-hospital {
+    background-color: var(--hospital-red);
+    border-color: var(--hospital-red);
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.btn-hospital:hover {
+    background-color: var(--hospital-dark-red);
+    border-color: var(--hospital-dark-red);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-hospital-outline {
+    background-color: transparent;
+    border-color: var(--hospital-red);
+    color: var(--hospital-red);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-hospital-outline:hover {
+    background-color: var(--hospital-red);
+    color: white;
+}
+
+/* Cards */
+.hospital-card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.hospital-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hospital-card .card-header {
+    background-color: var(--hospital-white);
+    border-bottom: 2px solid var(--hospital-red);
+    padding: 1.25rem 1.5rem;
+}
+
+.hospital-card .card-header h3 {
+    color: var(--hospital-dark-gray);
+    margin: 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+/* Tables */
+.hospital-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.hospital-table thead th {
+    background-color: var(--hospital-light-gray);
+    border-bottom: 2px solid var(--hospital-red);
+    color: var(--hospital-dark-gray);
+    font-weight: 600;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+}
+
+.hospital-table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--hospital-border);
+    vertical-align: middle;
+    transition: background-color 0.2s ease;
+}
+
+.hospital-table tbody tr:hover td {
+    background-color: rgba(200, 16, 46, 0.05);
+}
+
+/* Employee Components */
+.employee-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--hospital-light-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--hospital-red);
+    font-weight: bold;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.employee-info {
+    display: flex;
+    align-items: center;
+}
+
+.employee-name {
+    font-weight: 500;
+    color: var(--hospital-dark-gray);
+    margin-bottom: 0.125rem;
+}
+
+.employee-code {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.department-badge {
+    background-color: var(--hospital-light-red);
+    color: var(--hospital-dark-red);
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid var(--hospital-red);
+}
+
+/* Stats Cards */
+.stats-card {
+    background: linear-gradient(135deg, var(--hospital-red), var(--hospital-dark-red));
+    color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-2px);
+}
+
+.stats-card i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.stats-card .number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stats-card .label {
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+/* Search and Filter */
+.search-container {
+    position: relative;
+    max-width: 300px;
+}
+
+.search-container i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    z-index: 1;
+}
+
+.search-container input {
+    padding-left: 35px;
+}
+
+.filter-dropdown {
+    margin-left: 1rem;
+}
+
+/* ===== Utility Classes ===== */
+.text-hospital-red { color: var(--hospital-red) !important; }
+.bg-hospital-light { background-color: var(--hospital-light-red) !important; }
+.border-hospital { border-color: var(--hospital-red) !important; }
+
+/* Form Enhancements */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--hospital-red);
+    box-shadow: 0 0 0 0.2rem rgba(200, 16, 46, 0.25);
+}
+
+/* ===== Dashboard Specific Styles ===== */
+
+/* Quick Actions */
+.quick-action-card .card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.quick-action-card:hover .card {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.quick-action-icon {
+    transition: transform 0.3s ease;
+}
+
+.quick-action-card:hover .quick-action-icon {
+    transform: scale(1.1);
+}
+
+/* Activity List */
+.activity-item {
+    transition: background-color 0.2s ease;
+}
+
+.activity-item:hover {
+    background-color: var(--hospital-light-gray);
+}
+
+.activity-icon .employee-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Event List */
+.event-item {
+    transition: background-color 0.2s ease;
+}
+
+.event-item:hover {
+    background-color: var(--hospital-light-gray);
+}
+
+.event-date {
+    min-width: 50px;
+}
+
+/* Recognition */
+.recognition-item {
+    transition: transform 0.3s ease;
+}
+
+.recognition-item:hover {
+    transform: translateY(-2px);
+}
+
+/* Department Chart */
+.department-chart {
+    position: relative;
+}
+
+.department-item {
+    transition: background-color 0.2s ease;
+}
+
+.department-item:hover {
+    background-color: var(--hospital-light-gray);
+}
+
+/* Stats Card Enhancements */
+.stats-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--hospital-red), var(--hospital-dark-red));
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .department-chart {
+        margin-bottom: 2rem;
+    }
+    
+    .quick-action-card .card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .activity-item,
+    .event-item {
+        padding: 1rem;
+    }
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    /* Navigation */
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--hospital-border);
+    }
+
+    .navbar-nav .nav-link:last-child {
+        border-bottom: none;
+    }
+
+    /* Employee Components */
+    .employee-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .employee-avatar {
+        margin-bottom: 0.5rem;
+    }
+    
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .hospital-card .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .search-container {
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .stats-card .number {
+        font-size: 1.5rem;
+    }
+
+    /* Footer */
+    .hospital-footer .row {
+        text-align: center;
+    }
+
+    .hospital-footer .text-md-end {
+        text-align: center !important;
+        margin-top: 0.5rem;
+    }
+
+    /* Hide contact column on mobile */
+    .hospital-table thead th.contact-column,
+    .hospital-table tbody td.contact-column {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-fluid {
+        padding: 0 10px;
+    }
+    
+    .hospital-brand {
+        font-size: 1rem;
+    }
+    
+    .hospital-brand i {
+        font-size: 1.25rem;
+    }
 }
